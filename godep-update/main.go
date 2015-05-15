@@ -26,7 +26,7 @@ type dependency struct {
 	Rev        string
 }
 
-func do() (retErr error) {
+func do() error {
 	data, err := common.ReadAll("Godeps/Godeps.json")
 	if err != nil {
 		return err
