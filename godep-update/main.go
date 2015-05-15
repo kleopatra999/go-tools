@@ -3,18 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"os"
-	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/peter-edge/go-tools/common"
 )
 
 func main() {
-	if err := do(); err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err.Error())
-		os.Exit(1)
-	}
-	os.Exit(0)
+	common.Main(do)
 }
 
 type godeps struct {
@@ -31,17 +27,12 @@ type dependency struct {
 }
 
 func do() (retErr error) {
-	file, err := os.Open("Godeps/Godeps.json")
+	data, err := common.ReadAll("Godeps/Godeps.json")
 	if err != nil {
 		return err
 	}
-	defer func() {
-		if err := file.Close(); err != nil && retErr == nil {
-			retErr = err
-		}
-	}()
 	var godeps godeps
-	if err := json.NewDecoder(file).Decode(&godeps); err != nil {
+	if err := json.Unmarshal(data, &godeps); err != nil {
 		return err
 	}
 	successImportPaths := make(map[string]bool)
@@ -52,7 +43,7 @@ func do() (retErr error) {
 				if _, ok := successImportPaths[importPath]; ok {
 					break
 				}
-				if err := runCommand("godep", "update", importPath+"/..."); err == nil {
+				if err := common.Cmd(nil, nil, "godep", "update", importPath+"/..."); err == nil {
 					fmt.Println(importPath)
 					successImportPaths[importPath] = true
 					break
@@ -63,13 +54,6 @@ func do() (retErr error) {
 				}
 			}
 		}
-	}
-	return nil
-}
-
-func runCommand(args ...string) error {
-	if err := exec.Command(args[0], args[1:]...).Run(); err != nil {
-		return fmt.Errorf("%v: %v", args, err)
 	}
 	return nil
 }
