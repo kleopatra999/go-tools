@@ -38,3 +38,7 @@ func ReadAll(filePath string) (retValue []byte, retErr error) {
 	}()
 	return ioutil.ReadAll(file)
 }
+
+func Println(object interface{}) {
+	fmt.Printf("%+v\n", object)
+}

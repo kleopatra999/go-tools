@@ -20,8 +20,8 @@ func do(awsConfig *aws.Config) error {
 	if err := env.Populate(&appEnv, env.PopulateOptions{}); err != nil {
 		return err
 	}
-	s := sqs.New(awsConfig)
-	createQueueOutput, err := s.CreateQueue(
+	sqsClient := sqs.New(awsConfig)
+	createQueueOutput, err := sqsClient.CreateQueue(
 		&sqs.CreateQueueInput{
 			QueueName: aws.String(appEnv.QueueName),
 		},
@@ -29,7 +29,7 @@ func do(awsConfig *aws.Config) error {
 	if err != nil {
 		return err
 	}
-	_, err = s.PurgeQueue(
+	_, err = sqsClient.PurgeQueue(
 		&sqs.PurgeQueueInput{
 			QueueURL: createQueueOutput.QueueURL,
 		},
