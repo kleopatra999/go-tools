@@ -65,7 +65,7 @@ func do(awsConfig *aws.Config) error {
 	}
 	sort.Sort(sort.StringSlice(publicDNSNames))
 	for i, publicDNSName := range publicDNSNames {
-		fmt.Printf("%d: %s\n", i, publicDNSName)
+		fmt.Printf("%d:%s\n", i, publicDNSName)
 	}
 	return nil
 }
