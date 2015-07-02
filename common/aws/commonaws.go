@@ -3,9 +3,9 @@ package commonaws
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/codeship/go-tools/common"
 	"github.com/peter-edge/go-cacerts"
 	"github.com/peter-edge/go-env"
-	"github.com/peter-edge/go-tools/common"
 )
 
 type awsEnv struct {

@@ -7,8 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/ecs"
+	"github.com/codeship/go-tools/common/aws"
 	"github.com/peter-edge/go-env"
-	"github.com/peter-edge/go-tools/common/aws"
 )
 
 type appEnv struct {

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/peter-edge/go-tools/common"
+	"github.com/codeship/go-tools/common"
 )
 
 func main() {
