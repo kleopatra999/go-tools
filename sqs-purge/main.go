@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/awslabs/aws-sdk-go/aws"
-	"github.com/awslabs/aws-sdk-go/service/sqs"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/peter-edge/go-env"
 	"github.com/peter-edge/go-tools/common/aws"
 )
